@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './login.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -24,6 +25,13 @@ class _RegisterPageState extends State<RegisterPage> {
         const SnackBar(content: Text("Register successful")),
       );
     }
+  }
+
+  void goToLogin (){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context)=> const LoginPage()),
+    );
   }
 
   @override
@@ -140,6 +148,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
+                  TextButton(onPressed: goToLogin, 
+                  child: Text(
+                    "Already have an account? Login",
+                    style: TextStyle(fontSize: 18, color: Colors.amber[800]),
+                  ))
                 ],
               ),
             ),
