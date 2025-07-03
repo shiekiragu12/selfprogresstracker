@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '_card.dart'; // make sure the path is correct
+import '../_card.dart'; 
 
 class CardsMetrics extends StatelessWidget {
   const CardsMetrics({super.key});
