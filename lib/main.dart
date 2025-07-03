@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:localstorage/localstorage.dart';
 
 import '../screens/splashscreen.dart';
 import '../screens/homepage.dart';
@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   Future<bool> checkLoginStatus() async {
-    final prefs = await SharedPreferences.getInstance();
-    // Try SharedPreferences first
-    bool? isLoggedInPref = prefs.getBool('isLoggedIn');
+    final localStorage = LocalStorage('my_app_storage');
+    await localStorage.ready;
 
-    return isLoggedInPref ?? false;
+    // Expecting 'loggedin' to be a bool or truthy value
+    final isLoggedIn = localStorage.getItem('loggedin');
+    return isLoggedIn == true;
   }
 
   @override
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         future: checkLoginStatus(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const SplashScreen();
+            return const SplashScreen(); // or a loading spinner
           } else if (snapshot.hasData && snapshot.data == true) {
             return const MyHomePage();
           } else {
@@ -43,3 +44,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
