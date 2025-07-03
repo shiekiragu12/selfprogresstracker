@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../screens/splashscreen.dart';
 import '../screens/homepage.dart';
 
@@ -11,14 +10,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  Future<bool> checkLoginStatus() async {
-    final localStorage = LocalStorage('my_app_storage');
-    await localStorage.ready;
+ Future<bool> checkLoginStatus() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('loggedin') ?? false;
+}
 
-    // Expecting 'loggedin' to be a bool or truthy value
-    final isLoggedIn = localStorage.getItem('loggedin');
-    return isLoggedIn == true;
-  }
 
   @override
   Widget build(BuildContext context) {

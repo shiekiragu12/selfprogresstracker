@@ -1,7 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
 import './homepage.dart';
 import './register.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,19 +22,34 @@ void submitLogin() async {
     final email = emailController.text;
     final password = passwordController.text;
 
-    final localStorage = LocalStorage('app_data');
-    await localStorage.ready;
-    await localStorage.setItem('loggedin', true);
+    // Save login status using SharedPreferences
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('loggedin', true);
 
     print("Login: $email / $password");
+
+    // Show green SnackBar with emoji
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          "Login successful! 🥳",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.lightGreen,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+
+    await Future.delayed(const Duration(seconds: 2));
 
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const MyHomePage()),
-    ); // ✅ Added missing semicolon
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Login successful")),
     );
   }
 }
