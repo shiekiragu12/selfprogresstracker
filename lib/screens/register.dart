@@ -24,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('loggedin', true);
+      await prefs.setString('username',fullName);
 
       print("Register: $fullName / $email / $password");
 
