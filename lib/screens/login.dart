@@ -80,24 +80,26 @@ void submitLogin() async {
             backgroundColor: Colors.transparent,
             elevation: 0,
             automaticallyImplyLeading: false,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(30),
-                onTap: () => Navigator.of(context).pop(),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Color(0xFFFFCA28),
-                  ), // amber[400]
-                ),
-              ),
-            ),
+            // leading: Padding(
+            //   padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
+            //   child: InkWell(
+            //     borderRadius: BorderRadius.circular(30),
+            //     onTap: () => Navigator.of(context).pop(),
+            //     child: Container(
+            //       decoration: const BoxDecoration(
+            //         color: Colors.white,
+            //         shape: BoxShape.circle,
+            //       ),
+            //       padding: const EdgeInsets.all(8),
+            //       child: const Icon(
+            //         Icons.arrow_back,
+            //         color: Color(0xFFFFCA28),
+            //       ), // amber[400]
+            //     ),
+            //   ),
+            // ),
+            
+            
             title: null,
           ),
         ),
