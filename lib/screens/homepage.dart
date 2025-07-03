@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/_card.dart'; 
+import '../components/_card.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -7,7 +7,26 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Colored Card Example')),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.amber[600],
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(30),
+            ),
+          ),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+           
+            title: null,
+          ),
+        ),
+      ),
+
       body: ListView(
         children: [
           CustomCard(
