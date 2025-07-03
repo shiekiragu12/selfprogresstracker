@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -25,6 +26,13 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void goToRegister() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RegisterPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
         preferredSize: const Size.fromHeight(60),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.amber[600], 
+            color: Colors.amber[600],
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
               bottomRight: Radius.circular(30),
@@ -42,9 +50,26 @@ class _LoginPageState extends State<LoginPage> {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            automaticallyImplyLeading: false, 
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: null, // no title
+            automaticallyImplyLeading: false,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: () => Navigator.of(context).pop(),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Color(0xFFFFCA28),
+                  ), // amber[400]
+                ),
+              ),
+            ),
+            title: null,
           ),
         ),
       ),
@@ -113,6 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
+                  TextButton(
+                    onPressed: goToRegister,
+                    child: Text(
+                      "Don't have an account? Register",
+                      style: TextStyle(fontSize: 18, color: Colors.amber[800]),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -121,5 +153,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
 }
