@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import './homepage.dart';
 import './register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,18 +15,28 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void submitLogin() {
-    if (_formKey.currentState!.validate()) {
-      // Implement login logic here
-      final email = emailController.text;
-      final password = passwordController.text;
-      print("Login: $email / $password");
+void submitLogin() async {
+  if (_formKey.currentState!.validate()) {
+    final email = emailController.text;
+    final password = passwordController.text;
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Login successful")));
-    }
+    final localStorage = LocalStorage('app_data');
+    await localStorage.ready;
+    await localStorage.setItem('loggedin', true);
+
+    print("Login: $email / $password");
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MyHomePage()),
+    ); // ✅ Added missing semicolon
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Login successful")),
+    );
   }
+}
+
 
   void goToRegister() {
     Navigator.push(
