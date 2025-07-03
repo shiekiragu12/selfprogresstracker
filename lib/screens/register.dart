@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import './homepage.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,23 +16,47 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void submitRegister() {
+  void submitRegister() async {
     if (_formKey.currentState!.validate()) {
       final fullName = fullnameController.text;
       final email = emailController.text;
       final password = passwordController.text;
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('loggedin', true);
+
       print("Register: $fullName / $email / $password");
 
+      // Show green SnackBar with emoji
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Register successful")),
+        SnackBar(
+          content: const Text(
+            "Register Succesfully! 🥳",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.lightGreen,
+          duration: const Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: const EdgeInsets.all(16),
+        ),
+      );
+
+      await Future.delayed(const Duration(seconds: 2));
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MyHomePage()),
       );
     }
   }
 
-  void goToLogin (){
+  void goToLogin() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context)=> const LoginPage()),
+      MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
 
@@ -63,7 +89,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     shape: BoxShape.circle,
                   ),
                   padding: const EdgeInsets.all(8),
-                  child: const Icon(Icons.arrow_back, color: Color(0xFFFFCA28)), // amber[400]
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Color(0xFFFFCA28),
+                  ), // amber[400]
                 ),
               ),
             ),
@@ -85,7 +114,11 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.person_add_alt_1, size: 48, color: Colors.amber),
+                  const Icon(
+                    Icons.person_add_alt_1,
+                    size: 48,
+                    color: Colors.amber,
+                  ),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: fullnameController,
@@ -111,7 +144,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    validator: (value) => (value == null || !value.contains('@'))
+                    validator: (value) =>
+                        (value == null || !value.contains('@'))
                         ? 'Enter a valid email'
                         : null,
                   ),
@@ -148,11 +182,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
-                  TextButton(onPressed: goToLogin, 
-                  child: Text(
-                    "Already have an account? Login",
-                    style: TextStyle(fontSize: 18, color: Colors.amber[800]),
-                  ))
+                  TextButton(
+                    onPressed: goToLogin,
+                    child: Text(
+                      "Already have an account? Login",
+                      style: TextStyle(fontSize: 18, color: Colors.amber[800]),
+                    ),
+                  ),
                 ],
               ),
             ),
