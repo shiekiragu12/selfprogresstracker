@@ -64,14 +64,14 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           // 📊 Metrics Cards in Grid
           Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: GridView.count(
               crossAxisCount: 2, 
               crossAxisSpacing: 8,
               mainAxisSpacing: 4,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 1.5, 
+              childAspectRatio: 1.2, 
               children: const [
                 CustomCard(
                   title: 'Productive Days',
@@ -92,8 +92,8 @@ class _CardsMetricsState extends State<CardsMetrics> {
                   cardColor: Colors.blue,
                 ),
                 CustomCard(
-                  title: 'Upcoming Milestone',
-                  subtitle: 'Finish App',
+                  title: 'Total Goals Set',
+                  subtitle: '30',
                   icon: Icons.checklist_rtl_sharp,
                   cardColor: Colors.orange,
                 ),
