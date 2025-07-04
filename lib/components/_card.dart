@@ -22,9 +22,9 @@ class CustomCard extends StatelessWidget {
       color: cardColor,
       elevation: 4,
       margin: const EdgeInsets.all(10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),

@@ -54,43 +54,56 @@ class _CardsMetricsState extends State<CardsMetrics> {
           // 👋 Greeting
           Text(
             '$_greeting, $_username 👋',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.amber[800]),
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.amber[800],
+            ),
           ),
           const SizedBox(height: 20),
 
-          // 📊 Metrics Cards
-          CustomCard(
-            title: 'Productive Days',
-            subtitle: '20',
-            icon: Icons.run_circle_outlined,
-            cardColor: Colors.green,
-          ),
-          CustomCard(
-            title: 'Dormant Days',
-            subtitle: '10',
-            icon: Icons.dark_mode_outlined,
-            cardColor: Colors.grey,
-          ),
-          CustomCard(
-            title: 'Achieved Goals',
-            subtitle: '50',
-            icon: Icons.verified,
-            cardColor: Colors.blue,
-          ),
-          CustomCard(
-            title: 'Upcoming Milestone',
-            subtitle: 'Finish App',
-            icon: Icons.checklist_rtl_sharp,
-            cardColor: Colors.orange,
+          // 📊 Metrics Cards in Grid
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: GridView.count(
+              crossAxisCount: 2, 
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 4,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 1.5, 
+              children: const [
+                CustomCard(
+                  title: 'Productive Days',
+                  subtitle: '20',
+                  icon: Icons.run_circle_outlined,
+                  cardColor: Colors.green,
+                ),
+                CustomCard(
+                  title: 'Dormant Days',
+                  subtitle: '10',
+                  icon: Icons.dark_mode_outlined,
+                  cardColor: Colors.grey,
+                ),
+                CustomCard(
+                  title: 'Achieved Goals',
+                  subtitle: '50',
+                  icon: Icons.verified,
+                  cardColor: Colors.blue,
+                ),
+                CustomCard(
+                  title: 'Upcoming Milestone',
+                  subtitle: 'Finish App',
+                  icon: Icons.checklist_rtl_sharp,
+                  cardColor: Colors.orange,
+                ),
+              ],
+            ),
           ),
 
           const SizedBox(height: 20),
 
-          // ✅ TODO: Upcoming tasks section
-          Text(
-            "Today's Tasks",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          Text("Today's Tasks", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           // You can use a ListView.builder or Card here
           Card(
@@ -131,16 +144,19 @@ class _CardsMetricsState extends State<CardsMetrics> {
             "Progress Charts",
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const SizedBox(height: 100, child: Center(child: Text("📊 Bar chart goes here"))),
+          const SizedBox(
+            height: 100,
+            child: Center(child: Text("📊 Bar chart goes here")),
+          ),
 
           const SizedBox(height: 20),
 
           // 🥧 TODO: Pie Chart Placeholder
-          Text(
-            "Goal Overview",
-            style: Theme.of(context).textTheme.titleMedium,
+          Text("Goal Overview", style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(
+            height: 100,
+            child: Center(child: Text("🥧 Pie chart goes here")),
           ),
-          const SizedBox(height: 100, child: Center(child: Text("🥧 Pie chart goes here"))),
 
           const SizedBox(height: 20),
 
@@ -149,7 +165,12 @@ class _CardsMetricsState extends State<CardsMetrics> {
             "Filter Options",
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const SizedBox(height: 50, child: Center(child: Text("🔘 Filter buttons or dropdowns go here"))),
+          const SizedBox(
+            height: 50,
+            child: Center(
+              child: Text("🔘 Filter buttons or dropdowns go here"),
+            ),
+          ),
         ],
       ),
     );
