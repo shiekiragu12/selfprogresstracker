@@ -31,7 +31,7 @@ class CustomCard extends StatelessWidget {
           child: Row(
             children: [
               Icon(icon, size: 40, color: Colors.white),
-              const SizedBox(width: 16),
+              const SizedBox(width: 8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,17 +39,17 @@ class CustomCard extends StatelessWidget {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                     ),
                     const SizedBox(height: 5),
                     Text(
                       subtitle,
                       style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
+                        fontSize: 20,
+                        color: Colors.white,
                       ),
                     ),
                   ],
