@@ -17,7 +17,12 @@ class _CardsMetricsState extends State<CardsMetrics> {
   String _greeting = '';
   String selectedFilter = 'All';
 
-  final List<String> filterOptions = ['All', 'Completed', 'Pending', 'In Progress'];
+  final List<String> filterOptions = [
+    'All',
+    'Completed',
+    'Pending',
+    'In Progress',
+  ];
 
   @override
   void initState() {
@@ -111,32 +116,34 @@ class _CardsMetricsState extends State<CardsMetrics> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Filter Options",
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
               SizedBox(
                 height: 40,
-                child: DropdownButton<String>(
-                  value: selectedFilter,
-                  onChanged: (value) {
-                    if (value != null) {
-                      setState(() {
-                        selectedFilter = value;
-                      });
-                    }
-                  },
-                  underline: Container(),
-                  style: const TextStyle(color: Colors.black),
-                  dropdownColor: Colors.white,
-                  icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
-                  borderRadius: BorderRadius.circular(8),
-                  items: filterOptions.map((option) {
-                    return DropdownMenuItem(
-                      value: option,
-                      child: Text(option),
-                    );
-                  }).toList(),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    value: selectedFilter,
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          selectedFilter = value;
+                        });
+                      }
+                    },
+                    underline: Container(),
+                    style: const TextStyle(color: Colors.black),
+                    dropdownColor: Colors.white,
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                    items: filterOptions.map((option) {
+                      return DropdownMenuItem(
+                        value: option,
+                        child: Text(option),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
             ],
@@ -176,7 +183,10 @@ class _CardsMetricsState extends State<CardsMetrics> {
           const SizedBox(height: 20),
 
           // 📊 Progress Charts
-          Text("Progress Charts", style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            "Progress Charts",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(
             height: 200,
             child: Padding(
@@ -191,10 +201,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
           Text("Goal Overview", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(
             height: 180,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: GoalPieChart(),
-            ),
+            child: Padding(padding: EdgeInsets.all(8.0), child: GoalPieChart()),
           ),
 
           const SizedBox(height: 20),
