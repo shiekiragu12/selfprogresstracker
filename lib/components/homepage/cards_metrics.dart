@@ -3,6 +3,7 @@ import '../_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import './progress_bar_chart.dart';
+import './goal_pie_chart.dart';
 
 class CardsMetrics extends StatefulWidget {
   const CardsMetrics({super.key});
@@ -158,11 +159,11 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           const SizedBox(height: 20),
 
-          // 🥧 TODO: Pie Chart Placeholder
+          // 🥧 Goal Overview Section
           Text("Goal Overview", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(
-            height: 100,
-            child: Center(child: Text("🥧 Pie chart goes here")),
+            height: 180, // Increased height for better visibility
+            child: Padding(padding: EdgeInsets.all(8.0), child: GoalPieChart()),
           ),
 
           const SizedBox(height: 20),
