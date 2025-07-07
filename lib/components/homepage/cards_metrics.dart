@@ -113,13 +113,20 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           // 🧮 Filter Options with Dropdown
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 40,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
+
+          // Right-aligned Dropdown with clean spacing
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                ),
+                child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: selectedFilter,
                     onChanged: (value) {
@@ -129,7 +136,6 @@ class _CardsMetricsState extends State<CardsMetrics> {
                         });
                       }
                     },
-                    underline: Container(),
                     style: const TextStyle(color: Colors.black),
                     dropdownColor: Colors.white,
                     icon: const Icon(
@@ -146,7 +152,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
                   ),
                 ),
               ),
-            ],
+            ),
           ),
 
           const SizedBox(height: 20),
