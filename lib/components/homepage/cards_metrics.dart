@@ -66,12 +66,12 @@ class _CardsMetricsState extends State<CardsMetrics> {
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: GridView.count(
-              crossAxisCount: 2, 
+              crossAxisCount: 2,
               crossAxisSpacing: 8,
               mainAxisSpacing: 4,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 1.2, 
+              childAspectRatio: 1.2,
               children: const [
                 CustomCard(
                   title: 'Productive Days',
@@ -105,6 +105,14 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           Text("Today's Tasks", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+              },
+              child: const Text("See All"),
+            ),
+          ),
           // You can use a ListView.builder or Card here
           Card(
             child: ListTile(
@@ -125,15 +133,6 @@ class _CardsMetricsState extends State<CardsMetrics> {
               title: Text('Review weekly progress'),
               subtitle: Text('Due today'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 14),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                // TODO: Navigate to full task list
-              },
-              child: const Text("See All"),
             ),
           ),
 
