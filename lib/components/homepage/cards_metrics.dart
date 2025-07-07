@@ -15,6 +15,9 @@ class CardsMetrics extends StatefulWidget {
 class _CardsMetricsState extends State<CardsMetrics> {
   String _username = 'User';
   String _greeting = '';
+  String selectedFilter = 'All';
+
+  final List<String> filterOptions = ['All', 'Completed', 'Pending', 'In Progress'];
 
   @override
   void initState() {
@@ -102,25 +105,52 @@ class _CardsMetricsState extends State<CardsMetrics> {
               ],
             ),
           ),
-          Text(
-            "Filter Options",
-            style: Theme.of(context).textTheme.titleMedium,
+
+          // 🧮 Filter Options with Dropdown
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Filter Options",
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              SizedBox(
+                height: 40,
+                child: DropdownButton<String>(
+                  value: selectedFilter,
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() {
+                        selectedFilter = value;
+                      });
+                    }
+                  },
+                  underline: Container(),
+                  style: const TextStyle(color: Colors.black),
+                  dropdownColor: Colors.white,
+                  icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                  items: filterOptions.map((option) {
+                    return DropdownMenuItem(
+                      value: option,
+                      child: Text(option),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 50,
-            child: Center(
-              child: Text("🔘 Filter buttons or dropdowns go here"),
-            ),
-          ),
+
           const SizedBox(height: 20),
 
+          // 📅 Tasks
           Text("Today's Tasks", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(onPressed: () {}, child: const Text("See All")),
           ),
-          // You can use a ListView.builder or Card here
           Card(
             child: ListTile(
               title: Text('Design new goal cards'),
@@ -145,10 +175,8 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           const SizedBox(height: 20),
 
-          Text(
-            "Progress Charts",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          // 📊 Progress Charts
+          Text("Progress Charts", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(
             height: 200,
             child: Padding(
@@ -162,8 +190,11 @@ class _CardsMetricsState extends State<CardsMetrics> {
           // 🥧 Goal Overview Section
           Text("Goal Overview", style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(
-            height: 180, // Increased height for better visibility
-            child: Padding(padding: EdgeInsets.all(8.0), child: GoalPieChart()),
+            height: 180,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: GoalPieChart(),
+            ),
           ),
 
           const SizedBox(height: 20),
