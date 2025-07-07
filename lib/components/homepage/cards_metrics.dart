@@ -138,7 +138,6 @@ class _CardsMetricsState extends State<CardsMetrics> {
 
           const SizedBox(height: 20),
 
-          // 📈 TODO: Graph Placeholder
           Text(
             "Progress Charts",
             style: Theme.of(context).textTheme.titleMedium,
