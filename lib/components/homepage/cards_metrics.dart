@@ -89,7 +89,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
                   title: 'Achieved Goals',
                   subtitle: '50',
                   icon: Icons.verified,
-                  cardColor: Colors.blue,
+                  cardColor: Colors.purple,
                 ),
                 CustomCard(
                   title: 'Total Goals Set',
