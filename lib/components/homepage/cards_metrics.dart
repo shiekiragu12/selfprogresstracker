@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+import './progress_bar_chart.dart';
 
 class CardsMetrics extends StatefulWidget {
   const CardsMetrics({super.key});
@@ -107,11 +108,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
           const SizedBox(height: 8),
           Align(
             alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-              },
-              child: const Text("See All"),
-            ),
+            child: TextButton(onPressed: () {}, child: const Text("See All")),
           ),
           // You can use a ListView.builder or Card here
           Card(
@@ -143,8 +140,11 @@ class _CardsMetricsState extends State<CardsMetrics> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(
-            height: 100,
-            child: Center(child: Text("📊 Bar chart goes here")),
+            height: 200, 
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: ProgressBarChart(),
+            ),
           ),
 
           const SizedBox(height: 20),
