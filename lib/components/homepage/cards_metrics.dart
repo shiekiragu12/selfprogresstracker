@@ -101,7 +101,16 @@ class _CardsMetricsState extends State<CardsMetrics> {
               ],
             ),
           ),
-
+          Text(
+            "Filter Options",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(
+            height: 50,
+            child: Center(
+              child: Text("🔘 Filter buttons or dropdowns go here"),
+            ),
+          ),
           const SizedBox(height: 20),
 
           Text("Today's Tasks", style: Theme.of(context).textTheme.titleMedium),
@@ -140,7 +149,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(
-            height: 200, 
+            height: 200,
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: ProgressBarChart(),
@@ -157,18 +166,6 @@ class _CardsMetricsState extends State<CardsMetrics> {
           ),
 
           const SizedBox(height: 20),
-
-          // 🔍 TODO: Filtering Placeholder
-          Text(
-            "Filter Options",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(
-            height: 50,
-            child: Center(
-              child: Text("🔘 Filter buttons or dropdowns go here"),
-            ),
-          ),
         ],
       ),
     );
