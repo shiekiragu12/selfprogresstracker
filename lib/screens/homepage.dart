@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/homepage/cards_metrics.dart';
+import '../components/goals/goals_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -19,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CardsMetrics(),
-    Center(child: Text('Goals Placeholder')),
+    GoalDisplay(),
     Center(child: Text('Progress Placeholder')),
     Center(child: Text('Profile Placeholder')),
     Center(child: Text('Settings Placeholder')),
