@@ -23,7 +23,7 @@ class GoalDisplay extends StatefulWidget {
 class _GoalDisplayState extends State<GoalDisplay> {
   final List<Goal> _goals = [];
 
-  void _addGoal(String title) {
+  void _addGoal(String title, String description, String deadline) {
     setState(() {
       _goals.add(Goal(title: title, dateUploaded: DateTime.now()));
     });
