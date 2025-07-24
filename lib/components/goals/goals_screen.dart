@@ -32,62 +32,86 @@ class _GoalDisplayState extends State<GoalDisplay> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController deadlineController = TextEditingController();
+    DateTime? selectedDeadline;
+
 
   void _showAddGoalDialog() {
     final TextEditingController _controller = TextEditingController();
 
     showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add New Goal'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: titleController,
-                decoration: const InputDecoration(hintText: 'Enter goal title'),
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Add New Goal'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                hintText: 'Enter goal title',
               ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter goal description',
-                ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                hintText: 'Enter goal description',
               ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: deadlineController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter goal deadline (e.g. 2025-08-01)',
-                ),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // close dialog
-            },
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (titleController.text.isNotEmpty) {
-                _addGoal(
-                  titleController.text,
-                  descriptionController.text,
-                  deadlineController.text,
+            ),
+            const SizedBox(height: 8),
+            GestureDetector(
+              onTap: () async {
+                final pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now().add(const Duration(days: 1)),
+                  firstDate: DateTime.now().add(const Duration(days: 1)), // Future only
+                  lastDate: DateTime(2100),
                 );
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Add'),
-          ),
-        ],
+                if (pickedDate != null) {
+                  selectedDeadline = pickedDate;
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  selectedDeadline != null
+                      ? 'Deadline: ${selectedDeadline!.toLocal().toIso8601String().split('T')[0]}'
+                      : 'Tap to select goal deadline',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    );
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (titleController.text.isNotEmpty && selectedDeadline != null) {
+              _addGoal(
+                titleController.text,
+                descriptionController.text,
+                selectedDeadline!.toIso8601String(),
+              );
+              Navigator.pop(context);
+            }
+          },
+          child: const Text('Add'),
+        ),
+      ],
+    ),
+  );
+ 
   }
 
   String _daysAgo(DateTime date) {
