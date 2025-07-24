@@ -189,10 +189,7 @@ class _CardsMetricsState extends State<CardsMetrics> {
           const SizedBox(height: 20),
 
           // 📊 Progress Charts
-          Text(
-            "Progress Charts",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+         
           const SizedBox(
             height: 200,
             child: Padding(
