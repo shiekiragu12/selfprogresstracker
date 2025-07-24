@@ -6,18 +6,10 @@ class Goal {
   final bool isDone;
   final DateTime dateUploaded;
 
-  Goal({
-    required this.title,
-    this.isDone = false,
-    required this.dateUploaded,
-  });
+  Goal({required this.title, this.isDone = false, required this.dateUploaded});
 
   Goal toggleStatus() {
-    return Goal(
-      title: title,
-      isDone: !isDone,
-      dateUploaded: dateUploaded,
-    );
+    return Goal(title: title, isDone: !isDone, dateUploaded: dateUploaded);
   }
 }
 
@@ -37,6 +29,10 @@ class _GoalDisplayState extends State<GoalDisplay> {
     });
   }
 
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController deadlineController = TextEditingController();
+
   void _showAddGoalDialog() {
     final TextEditingController _controller = TextEditingController();
 
@@ -44,17 +40,48 @@ class _GoalDisplayState extends State<GoalDisplay> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Add New Goal'),
-        content: TextField(
-          controller: _controller,
-          decoration: const InputDecoration(hintText: 'Enter your goal'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: titleController,
+                decoration: const InputDecoration(hintText: 'Enter goal title'),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: descriptionController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter goal description',
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: deadlineController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter goal deadline (e.g. 2025-08-01)',
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () {
-              if (_controller.text.isNotEmpty) {
-                _addGoal(_controller.text);
+              Navigator.pop(context); // close dialog
+            },
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (titleController.text.isNotEmpty) {
+                _addGoal(
+                  titleController.text,
+                  descriptionController.text,
+                  deadlineController.text,
+                );
+                Navigator.pop(context);
               }
-              Navigator.pop(context);
             },
             child: const Text('Add'),
           ),
@@ -86,7 +113,10 @@ class _GoalDisplayState extends State<GoalDisplay> {
                   itemBuilder: (context, index) {
                     final goal = _goals[index];
                     return Card(
-                      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       child: ListTile(
                         title: Text(goal.title),
                         subtitle: Text(
@@ -95,7 +125,9 @@ class _GoalDisplayState extends State<GoalDisplay> {
                         ),
                         trailing: IconButton(
                           icon: Icon(
-                            goal.isDone ? Icons.check_box : Icons.check_box_outline_blank,
+                            goal.isDone
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
                             color: goal.isDone ? Colors.green : Colors.grey,
                           ),
                           onPressed: () {
